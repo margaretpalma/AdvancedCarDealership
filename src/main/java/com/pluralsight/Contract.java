@@ -2,12 +2,14 @@ package com.pluralsight;
 
 public abstract class Contract {
 
+    //base class - salescontract / leasecontract extend
+
     private String date;
     private String name;
     private String email;
-    private String vehicleSold;
+    private Vehicle vehicleSold;
 
-    public Contract(String date, String name, String email, String vehicleSold) {
+    public Contract(String date, String name, String email, Vehicle vehicleSold) {
         this.date = date;
         this.name = name;
         this.email = email;
@@ -38,11 +40,11 @@ public abstract class Contract {
         this.email = email;
     }
 
-    public String getVehicleSold() {
+    public Vehicle getVehicleSold() {
         return vehicleSold;
     }
 
-    public void setVehicleSold(String vehicleSold) {
+    public void setVehicleSold(Vehicle vehicleSold) {
         this.vehicleSold = vehicleSold;
     }
 
