@@ -2,19 +2,19 @@ package com.pluralsight;
 
 public class SalesContract extends Contract{
 
-    private double salesTax;
-    private double recordingFee;
+    private double salesTax ;
+    //never changes
+    private double recordingFee = 100;
     private double processingFee;
-    private boolean finance;
+    private boolean isFinanced;
 
-
-    public SalesContract(String date, String name, String email, Vehicle vehicleSold, double salesTax, double recordingFee,
-                         double processingFee, boolean finance) {
+    public SalesContract(String date, String name, String email, Vehicle vehicleSold,
+                         double salesTax, double recordingFee, double processingFee, boolean isFinanced) {
         super(date, name, email, vehicleSold);
         this.salesTax = salesTax;
         this.recordingFee = recordingFee;
         this.processingFee = processingFee;
-        this.finance = finance;
+        this.isFinanced = isFinanced;
     }
 
     public double getSalesTax() {
@@ -41,16 +41,29 @@ public class SalesContract extends Contract{
         this.processingFee = processingFee;
     }
 
-    public boolean isFinance() {
-        return finance;
+    public boolean isFinanced() {
+        return isFinanced;
     }
 
-    public void setFinance(boolean finance) {
-        this.finance = finance;
+    public void setFinanced(boolean financed) {
+        isFinanced = financed;
     }
 
+    @Override
+    public double getTotalPrice() {
+        return getVehicleSold().getPrice() + salesTax + recordingFee + processingFee;
+    }
 
-    /* Sales tax amount 5%
+    @Override
+    public double getMonthlyPayment() {
+        return 0;
+    }
+}
+
+
+
+
+/* Sales tax amount 5%
         Recording Fee $100
         Processing Fee $295 for vehicle under 10,000 , $495 for all others
         Finance Yes/No
