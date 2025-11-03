@@ -4,7 +4,7 @@ public class SalesContract extends Contract{
 
     private double salesTax ;
     //never changes
-    private double recordingFee = 100;
+    private double recordingFee;
     private double processingFee;
     private boolean isFinanced;
 
@@ -55,7 +55,10 @@ public class SalesContract extends Contract{
     }
 
     @Override
-    public double getMonthlyPayment() {
+    public double getmonthlyPayment() {
+
+
+
         return 0;
     }
 }
@@ -73,4 +76,3 @@ public class SalesContract extends Contract{
 
     //todo: overrides for getTotalPrice and getMonthlyPayment();
 
-}
