@@ -57,13 +57,11 @@ File I/O
 ```
 Menus: 
 INVENTORY FILE 
-<img width="1906" height="643" alt="inventory file " src="https://github.com/user-attachments/assets/74dbfb83-6276-4333-8d43-11f587e6bf27" />
-
-ADD LEASE CONTRACT
-<img width="1834" height="1010" alt="working add lease contract" src="https://github.com/user-attachments/assets/8eab53c1-77a3-4595-a82c-fb86c5927b32" />
-
-ERROR - VEHICLE NOT FOUND 
-<img width="981" height="614" alt="error in new contract" src="https://github.com/user-attachments/assets/5a28fe50-e679-41a1-b7d9-1e4beb99cc19" />
+<img width="1807" height="747" alt="Main Menu" src="https://github.com/user-attachments/assets/e8689ce9-b428-4562-bf57-eca38c4da5c7" />
+<img width="1906" height="643" alt="inventory file " src="https://github.com/user-attachments/assets/c5f8109c-dfde-44fb-aed1-ab932ed2c65d" />
+<img width="1734" height="101" alt="formatting error on csv file" src="https://github.com/user-attachments/assets/86a6b2d8-6ca7-47e6-b050-cce6eb32c910" />
+<img width="1801" height="538" alt="error" src="https://github.com/user-attachments/assets/9f884a9d-7b37-40ed-b278-e1ce5b886d9b" />
+<img width="981" height="614" alt="error in new contract" src="https://github.com/user-attachments/assets/a721a6a6-603a-4313-b174-df6d1938c632" />
 
 
 
