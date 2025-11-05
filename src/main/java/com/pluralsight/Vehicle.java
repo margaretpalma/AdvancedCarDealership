@@ -15,7 +15,8 @@ public class Vehicle {
     private double price;
 
     //constructor
-    public Vehicle(int vehicleVin, int vehicleYear, String vehicleMake, String vehicleModel, String vehicleType, String vehicleColor, int odometer, double price) {
+    public Vehicle(int vehicleVin, int vehicleYear, String vehicleMake, String vehicleModel, String vehicleType,
+                   String vehicleColor, int odometer, double price) {
         this.vehicleVin = vehicleVin;
         this.vehicleYear = vehicleYear;
         this.vehicleMake = vehicleMake;

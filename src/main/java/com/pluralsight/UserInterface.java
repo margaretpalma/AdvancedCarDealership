@@ -203,9 +203,41 @@ public class UserInterface {
         //save contract
         //exception catching
 
+        try {
+            String type = ConsoleHelper.promptForString("Enter Contract Type - Lease Or Sale");
+            String date = ConsoleHelper.promptForString("Enter Date (YYYY-MM-DD");
+            String name = ConsoleHelper.promptForString("Enter Customer Name");
+            String email = ConsoleHelper.promptForString("Enter Customer Email");
+            int vin = ConsoleHelper.promptForInt("Enter Vehicle Vin");
 
+            //find by vin
+            Vehicle vehicle = dealership.findByVehicleVin(vin);
+            if (vehicle == null) {
+                System.out.println("Vehicle Not Found");
+                return;
+            }
+            Contract contract;
+            //sale
+            if (type.equals("Sale")) {
+                boolean financed = ConsoleHelper.promptForString("Financing? (YES/NO)").equalsIgnoreCase("yes");
+                contract = new SalesContract(date, name, email, vehicle, financed);
 
+                //lease
+            } else if (type.equals("Lease")) {
+                //isFinanced is true, no choice to finance w/ lease
+                //fixed rate and months
+                contract = new LeaseContract(date, name, email, vehicle);
+            } else {
+                System.out.println("Invalid Contract Tpye - Enter Sale Or Lease");
+                return;
+            }
+            //save to
+            ContractFileManager.saveContract(contract);
+            dealership.removeVehicle(vehicle.getVehicleVin());
 
-        System.out.println("---create contract option here---");
+            System.out.println("Created And Saved Contract");
+        } catch (Exception e) {
+            System.out.println("Error Creating Contract" + e.getMessage());
+        }
     }
 }

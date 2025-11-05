@@ -151,5 +151,15 @@ public class Dealership {
         }
         return results;
     }
+//find by vin
+
+    public Vehicle findByVehicleVin(int vin){
+        for(Vehicle v : inventory){
+            if(v.getVehicleVin() == vin){
+                return v;
+            }
+        }
+        return null;
+    }
 }
 

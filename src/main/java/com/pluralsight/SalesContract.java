@@ -9,12 +9,13 @@ public class SalesContract extends Contract{
     private boolean isFinanced;
 
     public SalesContract(String date, String name, String email, Vehicle vehicleSold,
-                         double salesTax, double recordingFee, double processingFee, boolean isFinanced) {
+                       boolean isFinanced) {
         super(date, name, email, vehicleSold);
         this.salesTax = salesTax;
         this.recordingFee = recordingFee;
         this.processingFee = processingFee;
         this.isFinanced = isFinanced;
+
     }
 
     public double getSalesTax() {
