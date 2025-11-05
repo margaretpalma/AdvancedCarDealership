@@ -21,32 +21,16 @@ public class SalesContract extends Contract{
         return salesTax;
     }
 
-    public void setSalesTax(double salesTax) {
-        this.salesTax = salesTax;
-    }
-
     public double getRecordingFee() {
         return recordingFee;
-    }
-
-    public void setRecordingFee(double recordingFee) {
-        this.recordingFee = recordingFee;
     }
 
     public double getProcessingFee() {
         return processingFee;
     }
 
-    public void setProcessingFee(double processingFee) {
-        this.processingFee = processingFee;
-    }
-
     public boolean isFinanced() {
         return isFinanced;
-    }
-
-    public void setFinanced(boolean financed) {
-        isFinanced = financed;
     }
 
     @Override
@@ -56,15 +40,23 @@ public class SalesContract extends Contract{
 
     @Override
     public double getmonthlyPayment() {
+        if(!isFinanced) return 0;
+        double loanRate;
+        int months;
 
+        if(getVehicleSold().getPrice() >= 10000){
+            loanRate = 0.0425;
+            months = 48;
+        } else {
+            loanRate = 0.0525;
+            months = 24;
+        }
 
-
-        return 0;
+        double monthlyRate = loanRate / 12;
+        double price = getTotalPrice();
+        return (price * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
     }
 }
-
-
-
 
 /* Sales tax amount 5%
         Recording Fee $100

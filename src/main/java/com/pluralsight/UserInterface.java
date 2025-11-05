@@ -4,31 +4,28 @@ import java.util.ArrayList;
 
 public class UserInterface {
 
-    //load dealership from file
+    // load dealership from file
     private Dealership dealership;
 
-    //display menu
+    // display menu
     public void display() {
-        //
         init();
 
         int command;
 
-
-        //while loop
-
+        // main loop
         while (true) {
             displayMenu();
 
             command = ConsoleHelper.promptForInt("Enter Command");
 
-            //switch statements for menu
+            // switch statements for menu
             switch (command) {
-                //todo: all other cases
                 case 1:
                     processGetByPriceRequest();
                     break;
-                case 2:processGetByMakeModelRequest();
+                case 2:
+                    processGetByMakeModelRequest();
                     break;
                 case 3:
                     processGetByYearRequest();
@@ -51,34 +48,33 @@ public class UserInterface {
                 case 9:
                     processRemoveVehicleRequest();
                     break;
+                case 10:
+                    processMakeContractRequest();
+                    break;
                 case 99:
-                    System.out.println("Exiting Program");
+                    System.out.println("Exiting Program...");
                     return;
                 default:
-                    System.out.println("Invalid Option.");
-
+                    System.out.println("Invalid Option. Please Try Again.");
             }
         }
-
     }
 
-
-    //dealership info
+    // initialize dealership data
     private void init() {
         DealershipFileManager fileManager = new DealershipFileManager("DealershipFile.csv");
         this.dealership = fileManager.getDealership();
 
         if (dealership != null) {
-            System.out.println("Dealership : " + dealership.getName());
+            System.out.println("Dealership Loaded: " + dealership.getName());
         } else {
-            System.out.println("Error Loading Dealership");
+            System.out.println("Error Loading Dealership Data");
         }
     }
 
-    //display menu
-    //todo: other menu options
+    // main menu display
     private void displayMenu() {
-        System.out.println("*****Main Menu*****");
+        System.out.println("***** Main Menu *****");
         System.out.println("1 - Find Vehicles By Price Range");
         System.out.println("2 - Find Vehicles By Make/Model");
         System.out.println("3 - Find Vehicles By Year Range");
@@ -88,47 +84,42 @@ public class UserInterface {
         System.out.println("7 - List All Vehicles");
         System.out.println("8 - Add A Vehicle");
         System.out.println("9 - Remove A Vehicle");
+        System.out.println("10 - Create A New Contract");
         System.out.println("99 - Quit Program");
-
     }
 
-    //list vehicles
+    // list all vehicles
     private void processGetAllVehiclesRequest() {
         ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
         displayVehicles(vehicles);
     }
 
-    //helper method for vehicles
+    // helper method to display vehicles
     private void displayVehicles(ArrayList<Vehicle> vehicles) {
         if (vehicles == null || vehicles.isEmpty()) {
-            System.out.println("No Vehicles Found");
+            System.out.println("No Vehicles Found.");
             return;
         }
 
-        //print inventory list
-        System.out.println("---Inventory List---");
+        System.out.println("--- Inventory List ---");
         for (Vehicle v : vehicles) {
             System.out.println(v);
         }
     }
 
-
-    //get by price request
+    // search by price range
     private void processGetByPriceRequest() {
-        System.out.println("---Search By Price Range--- ");
-
-
+        System.out.println("--- Search By Price Range ---");
         double minPrice = ConsoleHelper.promptForDouble("Enter Minimum Price");
         double maxPrice = ConsoleHelper.promptForDouble("Enter Maximum Price");
 
         ArrayList<Vehicle> results = dealership.findByPriceRange(minPrice, maxPrice);
-
         displayVehicles(results);
     }
 
-    private void processGetByYearRequest(){
-        System.out.println("---Search By Year---");
-
+    // search by year
+    private void processGetByYearRequest() {
+        System.out.println("--- Search By Year Range ---");
         int minYear = ConsoleHelper.promptForInt("Enter Minimum Year");
         int maxYear = ConsoleHelper.promptForInt("Enter Maximum Year");
 
@@ -136,28 +127,28 @@ public class UserInterface {
         displayVehicles(results);
     }
 
-    private void processGetByColorRequest(){
-        System.out.println("---Search By Color---");
-
+    // search by color
+    private void processGetByColorRequest() {
+        System.out.println("--- Search By Color ---");
         String color = ConsoleHelper.promptForString("Enter Vehicle Color");
+
         ArrayList<Vehicle> results = dealership.findByColor(color);
         displayVehicles(results);
     }
 
-    private void processGetByMakeModelRequest(){
-        System.out.println("---Search By Make/Model---");
-
+    // search by make and model
+    private void processGetByMakeModelRequest() {
+        System.out.println("--- Search By Make/Model ---");
         String make = ConsoleHelper.promptForString("Enter Vehicle Make");
         String model = ConsoleHelper.promptForString("Enter Vehicle Model");
 
         ArrayList<Vehicle> results = dealership.findByMakeModel(make, model);
         displayVehicles(results);
-
     }
 
-    private void processGetByMileageRequest(){
-        System.out.println("---Search By Mileage Range---");
-
+    // search by mileage range
+    private void processGetByMileageRequest() {
+        System.out.println("--- Search By Mileage Range ---");
         int minMiles = ConsoleHelper.promptForInt("Enter Minimum Mileage");
         int maxMiles = ConsoleHelper.promptForInt("Enter Maximum Mileage");
 
@@ -165,16 +156,18 @@ public class UserInterface {
         displayVehicles(results);
     }
 
-    private void processGetByTypeRequest(){
-        System.out.println("---Search By Type---");
+    // search by type
+    private void processGetByTypeRequest() {
+        System.out.println("--- Search By Type ---");
         String type = ConsoleHelper.promptForString("Enter Vehicle Type (Car, Truck, Van)");
 
         ArrayList<Vehicle> results = dealership.findByType(type);
         displayVehicles(results);
     }
 
-    private void processAddVehicleRequest(){
-        System.out.println("---Add Vehicle---");
+    // add vehicle
+    private void processAddVehicleRequest() {
+        System.out.println("--- Add Vehicle ---");
 
         int vehicleVin = ConsoleHelper.promptForInt("Enter Vin Number: ");
         int vehicleYear = ConsoleHelper.promptForInt("Enter Vehicle Year: ");
@@ -185,22 +178,34 @@ public class UserInterface {
         int odometer = ConsoleHelper.promptForInt("Enter Vehicle Mileage: ");
         double price = ConsoleHelper.promptForDouble("Enter Vehicle Price: ");
 
-        System.out.println("**Vehicle Added**");
+        Vehicle newVehicle = new Vehicle(vehicleVin, vehicleYear, vehicleMake, vehicleModel, vehicleType, vehicleColor, odometer, price);
+        dealership.addVehicle(newVehicle);
 
+        System.out.println("** Vehicle Added Successfully **");
     }
 
-    private void processRemoveVehicleRequest(){
-        System.out.println("---Remove A Vehicle ---");
+    // remove vehicle
+    private void processRemoveVehicleRequest() {
+        System.out.println("--- Remove A Vehicle ---");
+        int removeVin = ConsoleHelper.promptForInt("Enter Vehicle VIN To Remove");
 
-        int remove = ConsoleHelper.promptForInt("Enter Vehicle Vin To Remove");
+        dealership.removeVehicle(removeVin);
+        System.out.println("** Vehicle Removed **");
+    }
 
-        ArrayList<Vehicle> results = dealership.removeVehicle(remove);
-        displayVehicles(results);
+    // create contract
+    private void processMakeContractRequest() {
+        System.out.println("--- Create A New Contract ---");
+        // todo: contract info lease&sale
+        //contract details: type/date/name/email/vin
+        //find vehicle
+        //contract building
+        //save contract
+        //exception catching
 
-        System.out.println("**Vehicle Removed**");
 
+
+
+        System.out.println("---create contract option here---");
     }
 }
-
-//        System.out.println("9 - Remove A Vehicle");
-//        System.out.println("99 - Quit Program");

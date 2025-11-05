@@ -2,8 +2,6 @@ package com.pluralsight;
 
 public class LeaseContract extends Contract {
 
-
-
     private double expectedEndingValue;
     private double leaseFee;
 
@@ -18,19 +16,9 @@ public class LeaseContract extends Contract {
         return expectedEndingValue;
     }
 
-    public void setExpectedEndingValue(double expectedEndingValue) {
-        this.expectedEndingValue = expectedEndingValue;
-    }
-
     public double getLeaseFee() {
         return leaseFee;
     }
-
-    public void setLeaseFee(double leaseFee) {
-        this.leaseFee = leaseFee;
-    }
-
-
 
     @Override
     public double getTotalPrice() {
@@ -43,18 +31,14 @@ public class LeaseContract extends Contract {
     Monthly payment based on Lease Finanaced at 4.0% for 36 months
      */
 
-
     @Override
-    public double getmonthlyPayment() {
-        double interestRate = 0.04;
+    public double getmonthlyPayment(){
+        double rate = 0.04 / 12;
         int months = 36;
-        double monthlyRate = interestRate / 12;
-
         double price = getTotalPrice();
         double principle = price - expectedEndingValue;
+        return (principle * rate) / (1 - Math.pow(1 + rate, -months));
 
-        double monthlyPayment = (principle * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
-        return getmonthlyPayment();
+
     }
-//todo: overrides for getTotalPrice(); and getMonthlyPayment
 }
