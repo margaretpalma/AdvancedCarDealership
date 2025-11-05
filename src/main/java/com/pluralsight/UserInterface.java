@@ -223,12 +223,12 @@ public class UserInterface {
                 contract = new SalesContract(date, name, email, vehicle, financed);
 
                 //lease
-            } else if (type.equals("Lease")) {
+            } else if (type.equalsIgnoreCase("Lease")) {
                 //isFinanced is true, no choice to finance w/ lease
                 //fixed rate and months
                 contract = new LeaseContract(date, name, email, vehicle);
             } else {
-                System.out.println("Invalid Contract Tpye - Enter Sale Or Lease");
+                System.out.println("Invalid Contract Type - Enter Sale Or Lease");
                 return;
             }
             //save to

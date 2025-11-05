@@ -1,1 +1,2 @@
-Contract Type|Date|C.Name|C.Email|Vin|Year|Make|Model|Type|Color|Odometer|Price|Total Price|Monthly Payment|
+Contract Type|Date|Customer Name|Customer Email|VIN|Year|Make|Model|Type|Color|Odometer|Price|Extra 1|Extra 2|Extra 3|Finance Option|Total Price|Monthly Payment
+LEASE|2025-10-05|m|mp@yuu.org|22012|2018|Lamborghini|Huracán|Coupe|Green|7200|249995.00|124997.50|17499.65|267494.65|4207.08

@@ -11,10 +11,14 @@ public class ContractFileManager {
 
             try (FileWriter writer = new FileWriter("DealershipContracts.csv", true)) {
 
+                writer.write("Contract Type|Date|Customer Name|Customer Email|VIN|Year|Make|Model|Type|Color|Odometer|Price|Extra 1|Extra 2|Extra" +
+                                 " 3|Finance Option|Total Price|Monthly Payment\n");
+
+
                 if (contract instanceof SalesContract sc) {
 
                     writer.write(String.format(
-                            "Sale|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%s|%.2f|%.2f%n",
+                            "SALE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%s|%.2f|%.2f%n",
                             sc.getDate(),
                             sc.getName(),
                             sc.getEmail(),
@@ -26,30 +30,33 @@ public class ContractFileManager {
                             sc.getVehicleSold().getVehicleColor(),
                             sc.getVehicleSold().getOdometer(),
                             sc.getVehicleSold().getPrice(),
-                            sc.getSalesTax(), sc.getRecordingFee(),
+                            sc.getSalesTax(),
+                            sc.getRecordingFee(),
                             sc.getProcessingFee(),
-                            sc.isFinanced() ? "Yes" : "No",
+                            sc.isFinanced() ? "YES" : "NO",
                             sc.getTotalPrice(),
                             sc.getmonthlyPayment()
                     ));
-                } else if (contract instanceof LeaseContract lc) {
+                }
+                else if (contract instanceof LeaseContract lc) {
                     writer.write(String.format(
-                            "Lease|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%s|%.2f|%.2f%n",
-                            lc.getDate(),
-                            lc.getName(),
-                            lc.getEmail(),
-                            lc.getVehicleSold().getVehicleVin(),
-                            lc.getVehicleSold().getVehicleYear(),
-                            lc.getVehicleSold().getVehicleMake(),
-                            lc.getVehicleSold().getVehicleModel(),
-                            lc.getVehicleSold().getVehicleType(),
-                            lc.getVehicleSold().getVehicleColor(),
-                            lc.getVehicleSold().getOdometer(),
-                            lc.getVehicleSold().getPrice(),
-                            lc.getExpectedEndingValue(),
-                            lc.getLeaseFee(),
-                            lc.getmonthlyPayment()
-                    ));
+                                "LEASE|%s|%s|%s|%d|%d|%s|%s|%s|%s|%d|%.2f|%.2f|%.2f|%.2f|%.2f%n",
+                                lc.getDate(),
+                                lc.getName(),
+                                lc.getEmail(),
+                                lc.getVehicleSold().getVehicleVin(),
+                                lc.getVehicleSold().getVehicleYear(),
+                                lc.getVehicleSold().getVehicleMake(),
+                                lc.getVehicleSold().getVehicleModel(),
+                                lc.getVehicleSold().getVehicleType(),
+                                lc.getVehicleSold().getVehicleColor(),
+                                lc.getVehicleSold().getOdometer(),
+                                lc.getVehicleSold().getPrice(),
+                                lc.getExpectedEndingValue(),
+                                lc.getLeaseFee(),
+                                lc.getTotalPrice(),
+                                lc.getmonthlyPayment()
+                        ));
                 }
 
             } catch (IOException e){
